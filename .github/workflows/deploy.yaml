@@ -21,8 +21,10 @@ jobs:
      - name: Setup Angular
        uses: actions/angular-github-actions
 
-     - name: Build and test
+     - name: Install angular dependencies
        uses: ng-easy/npm-install/v3
+    
+     - name: Build
        run: npm run build
 
      - name: Deploy Angular application to github pages
