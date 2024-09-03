@@ -1,0 +1,32 @@
+name: CI/CD for angular demo app
+
+on:
+  push: 
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+
+
+jobs:
+  build_and_deploy:
+   runs-on: ubuntu-latest
+   
+   steps:
+     - name: Checkout repository
+       uses: actions/checkout@v3
+
+     - name: Setup Angular
+       uses: actions/angular-github-actions
+
+     - name: Build and test
+       uses: ng-easy/npm-install/v3
+       run: npm run build
+
+     - name: Deploy Angular application to github pages
+       uses: bitovi/github-actions-angular-to-github-pages@v1.0.0
+       with:
+         branch: gh-pages
+         folder: build
